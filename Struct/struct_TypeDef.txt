@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define dim 5
+
+typedef struct info_a{
+    char nome[30];
+    char cognome[30];
+    float peso;
+    float altezza;
+    char nickn;
+  }info_atleta;
+
+struct info_a a[dim];
+
+int main(void){
+
+  int i;
+  float sum = 0;
+  float m;    //media
+
+  printf("Inserisci dati: \n\n");
+    
+  for(i = 0; i < dim; i ++){
+    printf("Nome: \n");
+    scanf("%s", a[i].nome);
+    printf("Cognome: \n");
+    scanf("%s", a[i].cognome);
+    printf("Peso: \n");
+    scanf("%f", &a[i].peso);
+    printf("Altezza: \n");
+    scanf("%f", &a[i].altezza);
+    //printf("Nickname: \n");
+    //scanf(" %c", &a[i].nickn);
+    printf("\n");
+  }
+
+  for(i = 0; i < dim; i ++){
+    sum += a[i].altezza;
+  }
+
+  m = sum / dim;
+
+  printf("Altezza media: %f\n", m);
+
+  for(i = 0; i < dim; i ++){
+    if(a[i].altezza > m){
+      printf("%s", a[i].nome);
+      printf(" %s\n", a[i].cognome);
+      printf("kg: %f\n", a[i].peso);
+      printf("h: %f\n", a[i].altezza);
+      //printf(" %c\n", a[i].nickn);
+      printf("\n");
+    }  
+  }
+  
+  // printf("Hello World\n");
+  return 0;
+}

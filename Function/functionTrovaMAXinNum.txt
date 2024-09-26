@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+/*
+  Si scriva un programma C che definisce la funzione
+  int cifra_massima(int num)
+  la quale deve restituire la cifra massima nella rappresentazione decimale di
+  num. Tale programma dovr`a inoltre definire un main che (1) chiede all’utente
+  di inserire un numero non negativo, (2) chiama la funzione cifra massima per
+  calcolarne la cifra massima e (3) stampa tale cifra massima trovata.
+  */
+
+int cifra_massima(int num) {
+  int n = num;
+  int last;
+  int max = -1;
+  while (n != 0) {
+    last = n % 10;
+    if (last > max)
+      max = last;
+    n = n / 10;
+  }
+  return max;
+}
+
+int main(void) {
+  int n = 4386057;
+  
+  int max = cifra_massima(n);
+  
+  printf("%d\n", max);
+  return 0;
+}

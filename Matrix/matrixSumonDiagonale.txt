@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define N 3
+
+int main() {
+  int m[N][N];
+  int x, y, s = 0;
+  srand(time(NULL));
+
+  // Richiesta
+  for (x = 0; x < N; x++) {
+    for (y = 0; y < N; y++) {
+      m[x][y] = rand() % 9 + 1;
+    }
+  }
+
+  // Visualizzazione
+  for (x = 0; x < N; x++) {
+    for (y = 0; y < N; y++) {
+      printf("%3d ", m[x][y]);
+    }
+    printf("\n");
+  }
+
+  printf("\n");
+
+  for (x = 0; x < N; x++) {
+    for (y = 0; y < N; y++) {
+      s += m[x][y];
+    }
+    m[x][x] = s;  //salvo il risulta di ogni riga sulla diagonale princiapale
+    s = 0;
+  }
+
+  for (x = 0; x < N; x++) {
+    for (y = 0; y < N; y++) {
+      printf("%3d ", m[x][y]);
+    }
+    printf("\n");
+  }
+}

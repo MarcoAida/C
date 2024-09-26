@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define n 4
+#define m 5
+
+void leggi(int a[n][m]) {
+  for (int i = 0; i < n; i++){
+    for (int j = 0; j < m; j++)
+      a[i][j] = rand() % 20 + 1;
+  }
+}
+
+void trasposta(int a[n][m], int b[m][n]) {
+  for (int i = 0; i < n; i++)
+    for (int j = 0; j < m; j++)
+      b[j][i] = a[i][j];
+
+  for (int i = 0; i < m; i++) {
+    for (int j = 0; j < n; j++)
+      printf("%d\t", b[i][j]);
+    printf("\n");
+  }
+}
+
+int main(void) {
+  srand(time(NULL));
+  int mat[n][m];
+  int trasp[m][n];
+
+  leggi(mat);
+
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < m; j++)
+      printf("%d\t", mat[i][j]);
+    printf("\n");
+  }
+  printf("\n");
+
+  trasposta(mat, trasp);
+
+  //printf("Hello World\n");
+  return 0;
+}

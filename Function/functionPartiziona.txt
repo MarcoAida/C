@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+/*Si scriva una funzione partiziona che riceve un array di interi e lo modifica
+  in modo che tutti i numeri dispari precedano i numeri pari. Si scriva quindi
+  una funzione main che testa la funzione chiedendo all’utente i valori per
+  riempire un array, passa tale array alla funzione partizione e lo stampa dopo
+  la sua esecuzione.
+  Esempio $ ./a.out
+  Inserire 10 valori interi: 59 26 53 22 31 41 80 87 78 37
+  Ecco i valori raggruppati: 53 59 41 31 87 37 22 26 80 78
+  */
+
+#define dim 10
+
+void leggi(int a[]) {
+  for (int i = 0; i < dim; i++)
+    a[i] = rand() % 90 + 1;
+}
+
+void partiziona(int a[], int n) {
+  int temp = 0;
+  int j = 0;
+  
+  for (int i = 0; i < n; i++) {
+      if (a[i] % 2 != 0) {
+        temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+        j ++;
+    }
+  }
+
+  for (int i = 0; i < dim; i++)
+    printf("%d ", a[i]);
+}
+
+int main(void) {
+  srand(time(NULL));
+  int a[dim];
+
+  leggi(a);
+
+  for (int i = 0; i < dim; i++)
+    printf("%d ", a[i]);
+
+  printf("\n");
+
+  partiziona(a, dim);
+
+  // printf("Hello World\n");
+  return 0;
+}

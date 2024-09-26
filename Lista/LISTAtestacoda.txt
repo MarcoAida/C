@@ -1,0 +1,93 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct elem_ {
+  int num;
+  struct elem_ *next;
+} elem;
+
+elem *inseriscitesta(elem *h, int v) {
+  elem *tmp;
+  tmp = (elem *)malloc(sizeof(elem));
+  if (tmp != NULL) {
+    tmp->num = v;
+    tmp->next = h;
+    h = tmp;
+  } else {
+    printf("full");
+  }
+  return h;
+}
+
+elem *inseriscicoda(elem *h, int v) {
+  elem *nuovo;
+  elem *tmp;
+  nuovo = (elem *)malloc(sizeof(elem));
+  if (nuovo != NULL) {
+    nuovo->num = v;
+    nuovo->next = NULL; // Set the new element's next pointer to NULL initially
+    if (h == NULL) {
+      h = nuovo;
+    } else {
+      for (tmp = h; tmp->next != NULL; tmp = tmp->next)
+        ;
+      tmp->next = nuovo; // Connect the last element to the new element
+    }
+  } else {
+    printf("full");
+  }
+  return h;
+}
+
+int esiste(elem *h, int n) {
+  int found = 0;
+  while (h != NULL && !found) {
+    if (h->num == n) {
+      found = 1;
+    }
+    h = h->next;
+  }
+  return found;
+}
+
+elem *distruggi(elem *h) {
+  elem *tmp;
+  while (h != NULL) {
+    tmp = h;
+    free(tmp);
+    h = h->next;
+  }
+  return h;
+}
+
+void visualizza(elem *h) {
+  while (h != NULL) {
+    printf("%d ", h->num);
+    h = h->next;
+  }
+  printf("\n");
+}
+
+int main(void) {
+  elem *lista = NULL;
+  int val;
+
+  scanf("%d", &val);
+
+  while (val != -1) {
+    // lista = inseriscitesta(lista, val);
+    lista = inseriscicoda(lista, val);
+    scanf("%d", &val);
+  }
+
+  visualizza(lista);
+
+  int e = esiste(lista, 5);
+  printf("%d\n", e);
+
+  lista = distruggi(lista);
+
+  visualizza(lista);
+
+  return 0;
+}

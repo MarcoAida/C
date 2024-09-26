@@ -1,0 +1,61 @@
+#include <stdio.h>
+
+/*
+  Si scriva un programma C in cui sono definite le funzioni:
+ int leggi(), che legge da tastiera un numero intero non negativo e lo
+restituisce. Se il valore inserito fosse negativo, deve continuare a chiederlo
+all’utente;  void stampa(int num), che stampa in italiano tutte le cifre
+del numero indicato. Per esempio, se numero `e 4301 allora deve stampare quattro
+tre zero uno; se numero `e 0 allora deve stampare zero.
+Tale programma deve avere anche una funzione main() che chiama leggi() per
+leggere un numero non negativo e poi chiama stampa() per stamparne le cifre in
+italiano. Suggerimento: Potete usare l’approccio descritto nell’Esercizio 7
+della Lezione 8, oppure utilizzare un array di supporto:  Per recuperare le
+cifre che compongono il numero intero utilizzare il modulo della divisione per
+10 (n % 10 restituisce la cifre meno significativa di n).  Memorizzare le
+cifre in un array di interi di dimensione massima 64.  Scorrere l’array
+dall’ultima cifra inserita fino alla cifra in posizione 0 per recuperare le
+cifre da sinistra a destra.
+  */
+
+// un array di puntatori a stringhe (caratteri) dove ogni elemento dell'array è
+// una stringa di caratteri
+char *cifreItaliane[] = {"zero",   "uno", "due",   "tre",  "quattro",
+                         "cinque", "sei", "sette", "otto", "nove"};
+
+int leggi() {
+  int n;
+  printf("inserisci un numero intero non negativo: \n");
+  do {
+    scanf("%d", &n);
+  } while (n < 0);
+  return n;
+}
+
+void stampa(int num) {
+  int n = num;
+  int last;
+  int a[64];
+  int i = 0;
+
+  while (n != 0) {
+    last = n % 10;
+    a[i] = last;
+    // stampa in ordine inverso
+    // printf("%s ", cifreItaliane[last]);
+    n = n / 10;
+    i++;
+  }
+
+  // per stampare in ordine
+  for (int j = i - 1; j >= 0; j--)
+    printf("%s ", cifreItaliane[a[j]]);
+}
+
+int main(void) {
+
+  int n = leggi();
+  stampa(n);
+
+  return 0;
+}

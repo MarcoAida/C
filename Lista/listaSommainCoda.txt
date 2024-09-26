@@ -1,0 +1,95 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+/*
+ Sia data una lista contenente almeno due elementi ed i cui nodi sono definiti
+ tramite la struttura C: struct elem (nodo).
+ Si scriva una funzione C che ricevendo in ingresso un puntatore alla lista
+ modifichi la stessa, memorizzando nell’ultimo nodo la somma dei valori di
+ tutti i nodi presenti nella lista. Ad esempio, una lista contenente la
+ sequenza di interi: 4 6 2 3 9 verrà modificata dalla funzione nella lista 4 6 2
+ 3 9 24 Realizzare anche la funzione per stampare la lista.
+ */
+
+struct nodo {
+  int valore;
+  struct nodo *next;
+};
+
+typedef struct nodo elem;
+
+void somma_lista(elem *lista) {
+  if (lista == NULL) {
+    printf("La lista è vuota.\n");
+    return;
+  }
+
+  int somma = 0;
+  elem *current = lista;
+
+  while (current->next != NULL) {
+    somma += current->valore;
+    current = current->next;
+  }
+
+  somma += current->valore;
+
+  elem *tmp = (elem *)malloc(sizeof(elem));
+  if (tmp != NULL) {
+    tmp->next = NULL;
+    tmp->valore = somma;
+    current->next = tmp;
+  } else {
+    printf("Errore nell'allocazione di memoria.\n");
+  }
+}
+
+void visualizza(elem *lista) {
+  while (lista != NULL) {
+    printf("%d ", lista->valore);
+    lista = lista->next;
+  }
+  printf("\n");
+}
+
+elem *inserisciInCoda(elem *lista, int val) {
+  elem *temp = (elem *)malloc(sizeof(elem));
+  if (temp != NULL) {
+    temp->next = NULL;
+    temp->valore = val;
+
+    if (lista == NULL) {
+      lista = temp;
+    } else {
+      elem *prec;
+      for (prec = lista; prec->next != NULL; prec = prec->next);
+      prec->next = temp;
+    }
+  } else {
+    printf("Errore nell'allocazione di memoria.\n");
+  }
+  return lista;
+}
+
+int main() {
+  int val;
+  elem *listav = NULL;
+
+  printf("Inserisci una sequenza di interi (termina con -1):\n");
+  do {
+    scanf("%d", &val);
+    if (val != -1) {
+      listav = inserisciInCoda(listav, val);
+    }
+  } while (val != -1);
+
+  printf("Lista originale: ");
+  visualizza(listav);
+
+  somma_lista(listav);
+
+  printf("Lista con la somma: ");
+  visualizza(listav);
+
+  return 0;
+}

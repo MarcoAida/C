@@ -1,0 +1,40 @@
+#include <stdio.h>
+
+/*Scrivere un programma C che conta il numero di spazi, tabulazioni e righe di
+  un testo. (variante: inserito da terminale. Testo (CTRL+D) per terminare:)
+  Nel mezzo del
+  cammin di
+  nostra vita
+  Spazi: 4
+  Tabulazioni: 0
+  Righe (newline): 2
+  */
+
+#define Fname "porto_sepolto.txt"
+
+int main(void) {
+  int contSpace = 0, contTab = 0, contNewline = 0;
+  char c;
+
+  FILE *fp;
+  fp = fopen(Fname, "r");
+
+  if (fp) {
+      while ((c = fgetc(fp)) != EOF) {
+      //fscanf(fp, " %c", &c);
+      if (c == '\n')
+        contNewline++;
+      if (c == ' ')
+        contSpace++;
+      if (c == '\t')
+        contTab++;
+    }
+    fclose(fp);
+    printf("Spazi: %d\nTabulazioni: %d\nRighe (newline): %d\n", contSpace,
+           contTab, contNewline);
+  } else {
+    printf("Error ...\n");
+  }
+
+  return 0;
+}

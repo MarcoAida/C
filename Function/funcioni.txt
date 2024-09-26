@@ -1,0 +1,119 @@
+#include <stdio.h>
+
+int somma(int v[], int dim) {
+  int tot = 0; // var. per memorizzare somma elementi
+
+  for (int i = 0; i < dim; i++) // ciclo sugli elementi dell'array
+    tot = tot + v[i];           // incremento tot
+
+  return tot;
+}
+
+void scambia(int *v, int dim, int i, int j) {
+  /* sanity check sulla possibilitÃ  di effetture lo scambio */
+  if (i < dim && j < dim && i > 0 && j > 0) {
+
+    int tmp = *(v + i);  // v[i]
+    *(v + i) = *(v + j); // v[i] = v[j]
+    *(v + j) = tmp;      // v[j] = tmp
+  }
+}
+
+int member(int a[], int dim, int x) {
+  int i = 0;
+  int trovato = 0; // flag (0: non trovato)
+  // come sopra
+  while (i < dim && !trovato) {
+    if (a[i] == x)
+      trovato = 1;
+
+    i++;
+  }
+  return trovato;
+}
+
+int sommapari(int a[], int dim) {
+  int somma = 0; // variabile accumulatore
+  for (int i = 0; i < dim; i++) {
+    /* se l'i-esimo elemento Ã¨ pari */
+    if (a[i] % 2 == 0)
+      /* lo aggiungo alla variabile accumulatore */
+
+      somma += a[i];
+  }
+  // resitutisco l'accumulatore
+  return somma;
+}
+
+int minoreditutti(int a[], int dim, int x) {
+  int i = 0;
+  int ok = 1; // flag, "nessun elemento minore di x"
+  // pattern con flag!
+  while (i < dim && ok) {
+    /* se l'i-esimo elemento Ã¨ minore di x */
+    if (x > a[i])
+      /* modifico flag */
+      ok = 0;
+    i++;
+  }
+  // come negli esempi di prima
+  return ok;
+}
+
+int minimo(int a[], int dim) {
+  int i = 0;
+  int min;     // variabile da ritornare
+  int trovato; // flag, "ho trovato il minimo"
+
+  while (i < dim && !trovato) {
+    /* se l'elemento i-esimo Ã¨ piÃ¹ piccolo di tutti gli altri */
+    if (minoreditutti(a, dim, a[i])) {
+      /* ho trovato il minimo e modifico il flag */
+      trovato = 1;
+      min = a[i];
+    }
+    i++;
+  }
+  // Si ricorda il minimo
+  return min;
+}
+
+int lunghezzaIte(char s[]) {
+  int l = 0;
+  // sfruttiamo il carattere di terminazione
+  while (s[l] != '\0')
+    l++;
+
+  return l;
+}
+
+int lunghezzaRic(char s[]) {
+  int l = 0;
+  if (s[l] == 0)
+    return 0;
+  else
+    return l + (lunghezzaRic(&s[l]) /* != '\0')*/);
+}
+
+int main(void) {
+  int a[4] = {2, 6, 3, 7};
+
+  int s = somma(a, 4);
+  printf("%d\n", s);
+
+  scambia(a, 4, 2, 4);
+
+  int m = member(a, 4, 3);
+  printf("%d\n", m);
+
+  int sp = sommapari(a, 4);
+  printf("%d\n", sp);
+
+  int mdt = minoreditutti(a, 4, 5345);
+  int min = minimo(a, 4);
+
+  printf("\n%d\n", mdt);
+  printf("%d\n", min);
+
+  return 0;
+}

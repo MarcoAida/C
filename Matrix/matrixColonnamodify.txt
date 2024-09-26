@@ -1,0 +1,34 @@
+#include <stdio.h>
+
+#define dim 10
+
+int main(void) {
+  int m[dim][dim];
+  for (int i = 0; i < dim; i++)
+    for (int j = 0; j < dim; j++)
+      m[i][j] = 0;
+
+  for (int i = 0; i < dim; i++) {
+    for (int j = 0; j < dim; j++)
+      printf("%d ", m[i][j]);
+    printf("\n");
+  }
+
+  printf("\n");
+
+  for (int i = 0; i < dim; i++)
+    for (int j = 0; j < dim; j++)
+      for (int k = j; k < dim; k++)
+        for (int h = i; h < dim; h++)
+          if(k > 2 && k < 4 && h > 2 && h < 8)
+            m[h][k] = 1;
+
+  for (int i = 0; i < dim; i++) {
+    for (int j = 0; j < dim; j++)
+      printf("%d ", m[i][j]);
+    printf("\n");
+  }
+
+  // printf("Hello World\n");
+  return 0;
+}

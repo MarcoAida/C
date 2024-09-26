@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <string.h>
+
+/*
+  Nel mezzo del
+  cammin di
+  nostra vita
+*/
+
+#define Fname "testo.txt"
+
+int main(void) {
+  int contSpace = 0, contTab = 0, contNewline = 0;
+  char c;
+
+  FILE *fp;
+  fp = fopen(Fname, "r");
+
+  if (fp) {
+    c = fgetc(fp);
+    while (!feof(fp)) {
+      if (c == '\n')
+        contNewline++;
+      if (c == ' ')
+        contSpace++;
+      if (c == '\t')
+        contTab++;
+      // fscanf(fp, " %c", &c);
+      c = fgetc(fp);
+    }
+    fclose(fp);
+    printf("Spazi: %d\nTabulazioni: %d\nRighe (newline): %d\n", contSpace,
+           contTab, contNewline);
+  } else {
+    printf("Error ...\n");
+  }
+
+  return 0;
+}

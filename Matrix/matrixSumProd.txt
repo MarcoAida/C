@@ -1,0 +1,51 @@
+#include <stdio.h>
+
+#define dim 10
+
+void makearr(int a[]) {
+  printf("inserisci num: \n");
+  for (int i = 0; i < dim; i++) {
+    scanf("%d", &a[i]);
+  }
+}
+
+void printarr(int a[]) {
+  printf("array: \n");
+  for (int i = 0; i < dim; i++) {
+    printf("%d ", a[i]);
+  }
+  printf("\n");
+}
+
+void oparr(int a[], int b[]) {
+  int s = 0;
+
+  for (int i = 0; i < dim; i++) {
+    if (i % 2 == 0) {
+      s = 0;                         // azzeramento della variabile s
+      for (int j = 0; j <= i; j++) { // somma da 0 a i
+        s += a[j];
+      }
+      b[i] = s;
+    } else {
+      b[i] = a[i] * a[i - 1];
+    }
+  }
+}
+
+int main(void) {
+  int a[dim];
+  int b[dim];
+
+  makearr(a);
+
+  printf("\n");
+
+  printarr(a);
+
+  oparr(a, b);
+
+  printarr(b);
+
+  return 0;
+}

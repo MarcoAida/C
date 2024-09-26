@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define N 5
+#define M 7
+
+int main(void) {
+  srand(time(NULL));
+  int a[N][M];
+  int copy;
+  int dom;
+
+  for (int i = 0; i < N; i++)
+    for (int j = 0; j < M; j++)
+      // scanf("%d", &a[i][j]);
+      a[i][j] = rand() % 9 + 1;
+
+  for (int i = 0; i < N; i++) {
+    for (int j = 0; j < M; j++)
+      printf("%d\t", a[i][j]);
+    printf("\n");
+  }
+
+  for (int i = 0; i < N - 1; i++) {
+    for (int j = 0; j < M - 1; j++) {
+      copy = a[i][j];
+      dom = 1;
+      for (int h = i + 1; h < N && dom; h++) {
+        for (int k = j + 1; k < M && dom; k++) {
+          if (copy <= a[h][k])
+            dom = 0;
+        }
+      }
+      if (dom)
+        printf(
+            "l'elemento in posizione (%d, %d) con il valore: %d e'dominante\n",
+            i, j, copy);
+    }
+  }
+
+  return 0;
+}

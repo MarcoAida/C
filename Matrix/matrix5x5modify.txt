@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define N 5
+
+int main(void) {
+  int i, j, h, k;
+  int m[N][N];
+
+  srand(1);
+  
+  for(int c = 0; c < N; c ++){
+    for(int d = 0; d < N; d ++){
+      m[c][d] = rand() % 9 + 1;
+    }
+  }
+
+  scanf("%d", &i);
+  scanf("%d", &j);
+
+  for(h = -1; h < 2; h ++){
+    for(k = -1; k < 2; k ++){
+      if(i + h >= 0 && i + h < N &&
+         j + k >= 0 && j + k < N &&
+         (h != 0 || k != 0)){
+        m[i + h][k + j] = 0;
+      } 
+    }
+  }
+
+  for(int c = 0; c < N; c ++){
+    for(int d = 0; d < N; d ++){
+      printf("%d  ", m[c][d]);
+    }
+    printf("\n");
+  }
+  
+  //printf("Hello World\n");
+  return 0;
+}

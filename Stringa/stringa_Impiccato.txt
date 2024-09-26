@@ -1,0 +1,70 @@
+#include <stdio.h>
+#include <string.h>
+
+/*Scrivere un programma che implementi il gioco dell'impiccato.
+  Il programma una parola di lunghezza massima 10 caratteri.
+  Il giocatore ha a disposizione 10 tentativi per indovinare la parola. Ad ogni
+  tentativo, il programma chiede all'utente di inserire una lettera e visualizza
+  i tentativi ancora disponibili. Inoltre, viene visualizzata la parola in
+  modalità nascosta (es. ciao diventa ****); se vengono indovinate delle
+  lettere, il programma le visualizza nella posizione corretta (es. se inserisco
+  a la parola nascosta diventa **a*).
+  Il programma termina quando il giocatore indovina la parola oppure quando
+  terminano i tentativi a disposizione.
+*/
+
+#define dim 15
+
+int main(void) {
+
+  char s[dim + 1] = "alfabeto";
+  char s1[dim + 1];
+
+  int len = 0;
+  while (s[len] != '\0')
+    len++;
+
+  for (int i = 0; i < len; i++) {
+    s1[i] = '*';
+  }
+
+  s1[len] = '\0';
+
+  // printf("%s\n", s);
+  printf("%s\n", s1);
+  printf("\n");
+
+  int tentativi = 10;
+  char lettera;
+  int trovato = 0;
+  int lettere_indovinate = 0;
+
+  while (tentativi > 0 && !trovato) {
+    printf("Inserisci lettera (tentativi rimasti %d): \n", tentativi);
+    scanf(" %c", &lettera);
+
+    for (int i = 0; i < len; i++) {
+      if (s[i] == lettera) {
+        s1[i] = lettera;
+        if (s1[i] != '*') {
+          lettere_indovinate++;
+        }
+      }
+    }
+
+    printf("%s\n", s1);
+    printf("\n");
+    tentativi--;
+
+    if (lettere_indovinate == len) {
+      printf("Hai indovinato : %s\n", s1);
+      trovato = 1; // Imposta a 1 se tutte le lettere sono state indovinate
+    }
+    
+  }
+
+  printf("trovata (0:no, 1:si): %d, con %d/10 tentativi rimasti\n", trovato,
+         tentativi);
+
+  return 0;
+}

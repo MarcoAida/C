@@ -1,0 +1,45 @@
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#define dim 3
+
+typedef struct {
+  char v[dim];
+  int x;
+  int y;
+} coor;
+
+int main() {
+  coor c[dim];
+  coor c1;
+
+  for (int i = 0; i < dim; i++) {
+    printf("lettera %c:\n", c[i].v[i] = 'a' + i);
+    scanf("%d", &c[i].x);
+    scanf("%d", &c[i].y);
+  }
+
+  printf("\nlettera c1:\n");
+  scanf("%d", &c1.x);
+  scanf("%d", &c1.y);
+
+  double distance;
+  double min = 10000000000; // Initialize min to a very large value
+  char close;
+  coor c2 = c[0];
+
+  for (int i = 0; i < dim; i++) {
+    distance = sqrt(pow(c[i].x - c1.x, 2) + pow(c[i].y - c1.y, 2));
+
+    if (distance < min) {
+      min = distance;
+      close = c[i].v[i];
+      c2 = c[i];
+    }
+  }
+
+  printf("lettera:%c (%d, %d)\n", close, c2.x, c2.y);
+
+  return 0;
+}

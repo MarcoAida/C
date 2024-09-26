@@ -1,0 +1,36 @@
+#include <stdio.h>
+
+/*Scrivere un programma C che chiede all’utente una sequenza di numeri a priori
+  illimitata e che termina con l’inserimento del numero 0 – non fa
+  parte della sequenza.
+  Il programma deve salvare i numeri (0 escluso) in un file di nome “valori.txt”
+  e come ultimo valore deve scrivere nel file quanti numeri sono stati salvati.
+  Ad esempio se l’utente inserisce 5 2 4 0 nel file nel file “valori.txt”
+  troveremo 5 2 4 3
+  */
+
+#define Fname "valori.txt"
+
+int main(void) {
+  int n;
+  int cont = 0;
+
+  FILE *fp;
+  fp = fopen(Fname, "w");
+
+  if(fp){
+    printf("Inserisci una sequenza di numeri a priori illimitata e termina con 0\n");
+
+    while(n != 0){
+      scanf("%d", &n);
+      cont ++;
+      if(n != 0)
+        fprintf(fp, "%d ", n);
+    }
+    fprintf(fp, "%d", cont - 1);
+  }else{
+    printf("Error ...\n");
+  }
+  
+  return 0;
+}

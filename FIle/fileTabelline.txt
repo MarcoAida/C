@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+/*Scrivere un programma C che crea il file di testo “tabellina.txt” con la
+  tabellina pitagorica fino a un dato numero (per es. fino a 5).
+  Utilizza il formato "%3i\t" per allineare i numeri a destra con almeno 3 spazi
+  come dimensione minima
+  */
+
+#define Fname "tabellina.txt"
+#define dim 15
+
+int main(void) {
+  FILE *fp;
+  fp = fopen(Fname, "w");
+
+  if (fp) {
+    for(int i = 1; i <= dim; i++){
+      for(int j = 1; j <= dim; j++)
+        fprintf(fp,"%3i\t", i * j);
+      fprintf(fp, "\n");
+    }
+  } else {
+    printf("Error ...\n");
+  }
+
+  return 0;
+}

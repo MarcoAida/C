@@ -1,0 +1,87 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+/*
+ Sia data una lista contenente almeno due elementi ed i cui nodi sono definiti
+tramite la seguente struttura C: struct nodo{ int valore; struct nodo *next;};
+Si scriva una funzione C che ricevendo in ingresso un puntatore alla lista
+modifichi la stessa, memorizzando nell’ultimo nodo il prodotto del penultimo ed
+ultimo nodo, nel penultimo il prodotto del terzultimo e del penultimo e così
+via. Il primo nodo non deve essere modificato (perché non ha un precedente). Ad
+esempio, una lista contenente la sequenza di interi 4 6 2 3 9 verrà modificata
+dalla funzione nella lista 4 24 12 6 27
+ */
+
+struct nodo {
+  int valore;
+  struct nodo *next;
+};
+
+typedef struct nodo elem;
+
+void modlista(elem *lista) {
+  int precvalue, currvalue;
+  elem *current, *prec;
+
+  prec = lista;
+  precvalue = prec->valore;
+
+  while (prec->next != NULL) {
+    current = prec->next;
+    currvalue = current->valore;
+    current->valore *= precvalue;
+    precvalue = currvalue;
+    prec = current;
+  }
+}
+
+void visualizza(elem *lista) {
+  while (lista != NULL) {
+    printf("%d ", lista->valore);
+    lista = lista->next;
+  }
+  printf("\n");
+}
+
+elem *inserisciInCoda(elem *lista, int val) {
+  elem *temp = (elem *)malloc(sizeof(elem));
+  if (temp != NULL) {
+    temp->next = NULL;
+    temp->valore = val;
+
+    if (lista == NULL) {
+      lista = temp;
+    } else {
+      elem *prec;
+      for (prec = lista; prec->next != NULL; prec = prec->next)
+        ;
+      prec->next = temp;
+    }
+  } else {
+    printf("Errore nell'allocazione di memoria.\n");
+  }
+  return lista;
+}
+
+int main() {
+  int val;
+  elem *listav = NULL;
+
+  printf("Inserisci una sequenza di interi (termina con -1):\n");
+  do {
+    scanf("%d", &val);
+    if (val != -1) {
+      listav = inserisciInCoda(listav, val);
+    }
+  } while (val != -1);
+
+  printf("Lista originale: ");
+  visualizza(listav);
+
+  modlista(listav);
+
+  printf("Lista con prodotti: ");
+  visualizza(listav);
+
+  return 0;
+}

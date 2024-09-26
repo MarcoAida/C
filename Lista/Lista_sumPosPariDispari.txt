@@ -1,0 +1,89 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+struct nodo {
+  int num;
+  struct nodo *next;
+};
+
+typedef struct nodo elem;
+
+void view_list(elem *list) {
+  while (list != NULL) {
+    printf("%d ", list->num);
+    list = list->next;
+  }
+  printf("\n");
+}
+
+elem *inseri_in_testa(elem *list, int val) {
+  elem *tmp = (elem *)malloc(sizeof(elem));
+  if (tmp != NULL) {
+    tmp->num = val;
+    tmp->next = list;
+    list = tmp;
+  } else {
+    tmp = NULL;
+  }
+  return list;
+}
+
+/*int sum_element_pos_pari(elem *list) {
+  int sum = 0;
+  while (list != NULL) {
+    sum += list->num;
+    list = list->next -> next;
+  }
+  return sum;
+}*/
+
+int sum_element_pos_pari(elem *list) {
+    int sum = 0;
+    int pos = 0;
+    while (list != NULL) {
+        if (pos % 2 == 0) {
+            sum += list->num;
+        }
+        list = list->next;
+        pos++;
+    }
+    return sum;
+}
+
+int sum_element_pos_dispari(elem *list) {
+    int sum = 0;
+    int pos = 0; // Le posizioni partono da 0
+    while (list != NULL) {
+        if (pos % 2 == 1) {  // Posizioni dispari
+            sum += list->num;
+        }
+        list = list->next;
+        pos++;
+    }
+    return sum;
+}
+
+
+int main(void) {
+  srand(time(NULL));
+  int val;
+  elem *list = NULL;
+
+  for (int i = 0; i < 10; i++) {
+    val = rand() % 10 + 1;
+    list = inseri_in_testa(list, val);
+  }
+
+  view_list(list);
+
+  printf("\n");
+
+  printf("Posizioni Pari (0-2-4-..):\t%d\n", sum_element_pos_pari(list));
+
+  printf("Posizioni Dispari (1-3-5-..):\t%d", sum_element_pos_dispari(list));
+
+  // printf("Hello World\n");
+
+  return 0;
+}

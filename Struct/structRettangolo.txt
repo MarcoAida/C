@@ -1,0 +1,85 @@
+#include <stdio.h>
+
+/*Si consideri la regione R del piano cartesiano individuata dalle ascisse
+  comprese tra 0 e 9 e dalle ordinate comprese tra 0 e 9. Scrivere un programma
+  C che chiede all'utente le coordinate di due punti a e b appartenenti a R e
+  disegna il perimetro del rettangolo con i lati paralleli agli assi cartesiani
+  che ha il segmento ab come diagonale.
+  Le coordinate di a e b devono essere intere. Il programma deve definire le
+  seguenti strutture: Una struttura punto che contiene ascissa e ordinata.
+  Un'opportuna struttura rettangolo che rappresenta i rettangoli con i lati
+  paralleli agli assi cartesiani.*/
+
+#define dim 10
+
+struct punto {
+  int x;
+  int y;
+};
+
+struct rettangolo {
+  struct punto a;
+  struct punto b;
+};
+
+/*Richiede all'utente ascissa e ordinata (entrambe di tipo int) e restituisce la
+ corrispondente struttura. Se una delle coordinate inserite non è compresa tra
+ 0 e 9, essa viene richiesta di nuovo.*/
+
+struct punto inserisci_punto() {
+  struct punto p;
+  do {
+    scanf("%d", &p.x);
+    scanf("%d", &p.y);
+  } while (p.x < 0 || p.x > 9 || p.y < 0 || p.y > 9);
+  return p;
+}
+
+/* Riceve due punti, a e b, del piano cartesiano e restituisce il corrispondente
+ * rettangolo con i lati paralleli agli assi che ha il segmento ab come
+ * diagonale*/
+
+struct rettangolo crea_rettangolo(struct punto a, struct punto b) {
+  struct rettangolo r;
+  r.a = a;
+  r.b = b;
+  return r;
+}
+
+/*Stampa la regione R in cui è opportunamente raffigurato il perimetro di
+ * rettangolo.*/
+void stampa_perimetro(struct rettangolo r) {
+  for (int i = 0; i < dim; i++) {
+    for (int j = 0; j < dim; j++) {
+      // Verifica se la posizione corrente è sul perimetro del rettangolo
+      if ((i == r.a.x || i == r.b.x) && (j >= r.a.y && j <= r.b.y) ||
+          //(j >= r.a.y && j <= r.b.y) compreso tra y di a e y di b(colonna)
+          (j == r.a.y || j == r.b.y) && (i >= r.a.x && i <= r.b.x)) {
+        //(i >= r.a.x && i <= r.b.x) compreso tra y di a e y di b(riga)
+        printf("*");
+      } else {
+        printf(" ");
+      }
+    }
+    printf("\n");
+  }
+}
+
+int main(void) {
+  // struct punto puntoA = {1, 1};
+  // struct punto puntoB = {4, 4};
+  // struct rettangolo risultato = crea_rettangolo(puntoA, puntoB);
+  // stampa_perimetro(risultato);
+
+  struct punto a, b;
+
+  printf("Inserisci punto a (x, y): \n");
+  a = inserisci_punto();
+  printf("Inserisci punto b (x, y): \n");
+  b = inserisci_punto();
+
+  struct rettangolo result = crea_rettangolo(a, b);
+  stampa_perimetro(result);
+
+  return 0;
+}

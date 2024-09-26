@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define D 4
+
+int main() {
+  int a[D][D];
+  int i, j;
+  int flag = 0;
+  srand(time(NULL));
+
+  printf("\n");
+
+  for (i = 0; i < D; i++) {
+    for (j = 0; j < D; j++) {
+      // a[i][j] = (rand() % 4) * 2 + 1;    //dispari
+      a[i][j] = (rand() % 4) * 2; // pari
+    }
+  }
+
+  for (i = 0; i < D; i++) {
+    for (j = 0; j < D; j++) {
+      printf("%3d", a[i][j]);
+    }
+    printf("\n");
+  }
+
+  printf("\n");
+
+  for (i = 0; i < D; i++) {
+    for (j = 0; j < D; j++) {
+      if (a[i][j] % 2 == 0) {
+        flag = 1;
+      }
+    }
+  }
+
+  printf("%d\n", flag);
+
+  return 0;
+}

@@ -1,0 +1,34 @@
+#include <stdio.h>
+
+struct date {
+  int day;
+  int month;
+  int year;
+};
+
+void changeDate(struct date d) {
+  d.day = 24;
+  d.month = 6;
+}
+
+struct date changeDate2(struct date d) {
+  struct date result;
+  result.day = d.day + 7;
+  result.month = d.month + 4;
+  result.year = d.year + 2;
+  return result;
+}
+
+int main(void) {
+  struct date d;
+  struct date d2 = changeDate2(d);
+  
+  d.day = 9;
+  d.month = 3;
+  d.year = 2021;
+
+  printf("Data di oggi: %02i/%02i/%i\n", d.day, d.month, d.year);
+  printf("Data di oggi: %02i/%02i/%i\n", d2.day, d2.month, d2.year);
+
+  return 0;
+}

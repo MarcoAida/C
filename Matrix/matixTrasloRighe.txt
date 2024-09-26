@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+// traslo le colonne della matrice verso destra di n posizioni
+
+#define dim 5
+
+int main() {
+  srand(time(NULL));
+  int m[dim][dim];
+  int n = 2;
+
+  /*printf("Inserisci il numero di posizioni da spostare: ");
+  scanf("%d", &n);
+  while (n <= 0 || n > dim)
+    scanf("%d", &n);
+*/
+  for (int i = 0; i < dim; i++) {
+    for (int j = 0; j < dim; j++)
+      m[i][j] = rand() % 9 + 1;
+  }
+
+  for (int i = 0; i < dim; i++) {
+    for (int j = 0; j < dim; j++)
+      printf("%d\t", m[i][j]);
+    printf("\n");
+  }
+
+  printf("\n");
+
+  int tmp[dim]; // Array temporaneo per memorizzare gli elementi della riga 
+                // da traslare
+
+  // Trasla le righe di n posizioni verso il basso
+  for (int j = 0; j < dim; j++) {
+    // Memorizza gli elementi della riga traslare nell'array temporaneo
+    for (int i = 0; i < dim; i++) {
+      tmp[i] = m[i][j];
+    }
+
+    // Sposta gli elementi della riga verso il basso di n posizioni
+    for (int i = 0; i < dim; i++) {
+      m[(i + n) % dim][j] = tmp[i];
+    }
+  }
+
+  for (int i = 0; i < dim; i++) {
+    for (int j = 0; j < dim; j++)
+      printf("%d\t", m[i][j]);
+    printf("\n");
+  }
+
+  return 0;
+}

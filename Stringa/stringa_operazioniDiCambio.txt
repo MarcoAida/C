@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <string.h>
+
+#define dim 30
+
+int main(void) {
+  // char s[dim + 1];
+  char s[dim + 1] = "aiisgsddvueuttfevuif";
+  // char s[dim + 1] = "programmazione";
+  /*char s[dim + 1] ="linguaggio";
+  char s[dim + 1] ="sviluppo";
+  char s[dim + 1] ="informatica";
+  char s[dim + 1] ="codice";
+  char s[dim + 1] ="esempio";
+  char s[dim + 1] ="variabile";
+  char s[dim + 1] ="compilatore";
+  char s[dim + 1] ="funzione";
+  char s[dim + 1] ="struttura";*/
+
+  char z[dim + 1];
+  int i, j = 0;
+
+  // sostituisco le vocali con *
+  /*for (i = 0; s[i] != '\0'; i++) {
+    if (s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u')
+      s[i] = '*';
+  }*/
+
+  // sostituisco le vocali con lo spazio
+  /*for (i = 0; s[i] != '\0'; i++) {
+    if (s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u')
+      s[i] = ' ';
+  }*/
+
+  // tolgo le vocali
+  for (i = 0; s[i] != '\0'; i++) {
+    if (!(s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' ||
+          s[i] == 'u')) {
+      z[j] = s[i];
+      j++;
+    }
+  }
+
+  // tolgo le consonanti
+  for (i = 0; s[i] != '\0'; i++) {
+    if ((s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' ||
+         s[i] == 'u')) {
+      z[j] = s[i];
+      j++;
+    }
+  }
+
+  s[i] = '\0';
+  z[i] = '\0';
+
+  printf("%s\n", s);
+  printf("%s\n", z);
+
+  return 0;
+}

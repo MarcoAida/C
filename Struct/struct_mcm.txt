@@ -1,0 +1,46 @@
+#include <stdio.h>
+
+typedef struct{
+  int n;
+  int d;
+}f_t;
+
+int main(void) {
+  f_t a, b, sum;
+
+  printf("Inserisci le frazioni: \n");
+  printf("a = \t");
+  scanf("%d", & a.n);
+  printf("\t\t");
+  scanf("%d", & a.d);
+  printf("\nb = \t");
+  scanf("%d", & b.n);
+  printf("\t\t");
+  scanf("%d", & b.d);
+
+  if(a.d == b.d)
+    sum.d  = a.d;
+  else
+    sum.d = a.d * b.d;
+
+  printf("\nmcm: %d\n", sum.d);
+
+  sum.n = a.n * (sum.d / a.d) + b.n * (sum.d / b.d);
+
+  for(int i = 1; i < 11; i ++){
+    if( (sum.n %i == 0) && (sum.d %i == 0) ){
+      sum.n /= i;
+      sum.d /= i;
+    }
+    if( (sum.n %i == 0) && (sum.d %i == 0) ){
+      sum.n /= i;
+      sum.d /= i;
+    }
+  }
+
+  printf("\nsum = \t%d\n", sum.n);
+  printf("\t\t%d", sum.d);
+  
+  //printf("Hello World\n");
+  return 0;
+}
