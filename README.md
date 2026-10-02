@@ -1,3 +1,3 @@
 # C
 
-Esercizi vari
+Esercizi
